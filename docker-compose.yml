@@ -1,0 +1,11 @@
+version: '3' # compose.ymlはバージョン3を使用しますって意味。２と３では若干書き方が違うらしい
+services:
+  app:
+    build:
+      context: . # ビルドに使うDockerファイルの位置を指定。今回は同一階層にDockerfileがあるので「.」
+      dockerfile: . # Dockerfileのファイル名がDockerfile-myとかだったらDockerfile-myにする系？今回は普通のファイル名だから「.」
+    image: scraiping-practice # 使うイメージはscraiping-practiceを使いますよーって意味（Dockerfileを直接ビルドした時に作ったやつ）
+    volumes:
+      - '.:/app' # ワークディレクトリをコンテナ内のappディレクトリ内にマウントする（マウントしたいローカルディレクトリ：コンテナ内のマウント先）
+    container_name: scraiping # コンテナ名をつける
+    tty: true # ENTRYPOINT ["/bin/sh", "-c", "while :; do sleep 10; done"]と多分同じ意味。起動させたままにする的な。
